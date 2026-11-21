@@ -337,6 +337,16 @@ export default function CustomizeClient({
     setCustomActive(initial.customActive);
   }, [initial.glowEnabled, initial.usernameGlow, initial.layout, initial.customActive]);
 
+  useEffect(() => {
+    if (!dirty) return;
+    const warnBeforeLeaving = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warnBeforeLeaving);
+    return () => window.removeEventListener("beforeunload", warnBeforeLeaving);
+  }, [dirty]);
+
   async function save() {
     setSaving(true);
     try {
@@ -373,12 +383,17 @@ export default function CustomizeClient({
           avatarHidden: hideAvatar,
           viewsPosition,
           showFeedback,
+          // Layout was previously only included in the separate layout action,
+          // so selecting Halo and using the main Save button silently lost it.
+          layout,
+          ...(layout === "halo" && customActive ? { customLayout: null } : {}),
         }),
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.error ?? "Could not save.");
+      const data = await res.json().catch(() => null);
+      if (!res.ok || data?.ok !== true) {
+        throw new Error(data?.error ?? "Could not save your customization.");
       }
+      if (layout === "halo") setCustomActive(false);
       pushToast("Customization saved — it is live on your profile!");
       setBaseline({ ...current });
       router.refresh();
@@ -415,8 +430,21 @@ export default function CustomizeClient({
 
   return (
     <div className="flex w-full flex-col">
-      <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
-        <span className={SECTION_LABEL}>Customize</span>
+      <div className="sticky top-2 z-30 mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#292929] bg-[#111111]/95 p-3 shadow-xl backdrop-blur-md">
+        <div className="min-w-0">
+          <span className={SECTION_LABEL}>Customize</span>
+          <p className={`ml-[5px] mt-1 text-xs ${dirty ? "text-amber-300" : "text-emerald-400"}`} aria-live="polite">
+            {dirty ? "You have unsaved changes" : "All changes saved"}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={save}
+          disabled={saving || !dirty}
+          className={`${modalPrimaryBtn} min-w-[145px] shrink-0 disabled:cursor-not-allowed disabled:opacity-45`}
+        >
+          {saving ? "Saving…" : dirty ? "Save Changes" : "Saved"}
+        </button>
       </div>
 
       <section>
