@@ -3,6 +3,7 @@ import { ValorantWidget } from "./valorant";
 import { LanyardWidget } from "./lanyard";
 import { WeatherWidget } from "./weather";
 import { ClockWidget } from "./clock";
+import { SpotifyWidget } from "./spotify";
 import type { WidgetTileMeta } from "./tile";
 import type { WidgetGlass } from "./glass";
 
@@ -30,7 +31,7 @@ export interface WidgetTemplate extends WidgetTileMeta {
  *  1. Create a file next to these (e.g. `spotify.tsx`) exporting a
  *     component shaped like `{ config }: WidgetComponentProps`.
  *  2. Import it here and append an entry to `WIDGET_TEMPLATES`.
- *  3. Add the type to `WIDGET_TYPES` in `lib/widgets.ts`.
+ *  3. Add the type to `WIDGET_TYPES` in `lib/widget-types.ts`.
  *
  * Profiles render `ProfileWidgets` below the main card; the dashboard
  * Widgets page renders this array for the list, picker and config modals.
@@ -65,6 +66,16 @@ export const WIDGET_TEMPLATES: WidgetTemplate[] = [
     glyph: "weather",
     file: "weather.tsx",
     Component: WeatherWidget,
+  },
+  {
+    type: "spotify",
+    label: "Spotify",
+    description: "Embed a Spotify track, album or playlist",
+    category: "Music",
+    tileColor: "#1DB954",
+    glyph: "spotify",
+    file: "spotify.tsx",
+    Component: SpotifyWidget,
   },
   {
     type: "clock",
@@ -102,7 +113,7 @@ export function ProfileWidgets({
       (entry): entry is { widget: (typeof widgets)[number]; template: WidgetTemplate } =>
         !!entry.template
     )
-    .slice(0, 4);
+    .slice(0, 6);
 
   if (visible.length === 0) return null;
 

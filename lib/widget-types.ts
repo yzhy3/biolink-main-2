@@ -4,11 +4,11 @@
  * never be bundled for the browser.)
  */
 
-export const WIDGET_TYPES = ["valorant", "lanyard", "weather", "clock"] as const;
+export const WIDGET_TYPES = ["valorant", "lanyard", "weather", "clock", "spotify"] as const;
 
 export type WidgetType = (typeof WIDGET_TYPES)[number];
 
-export const MAX_WIDGETS = 4;
+export const MAX_WIDGETS = 6;
 
 export interface WidgetState {
   type: string;

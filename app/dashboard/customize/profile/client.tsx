@@ -104,11 +104,12 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Could not save your profile.");
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.ok !== true) {
+        throw new Error(result?.error ?? "Could not save your profile.");
       }
 
-      pushToast("Profile Saved!");
+      pushToast("Profile saved successfully.");
       router.refresh();
     } catch (error) {
       pushToast(error instanceof Error ? error.message : "Could not save your profile.");

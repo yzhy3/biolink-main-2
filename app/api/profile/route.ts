@@ -18,6 +18,7 @@ type ProfileRequestBody = {
   layout?: string;
   avatarUrl?: string | null;
   backgroundUrl?: string | null;
+  backgroundColor?: string;
   bannerUrl?: string | null;
   cursorUrl?: string | null;
   blur?: number;
@@ -157,6 +158,11 @@ export async function PUT(req: Request) {
 
   if (body.backgroundUrl !== undefined) {
     profileData.backgroundUrl = body.backgroundUrl || null;
+  }
+\n  // The profile editor submits this field; persist it alongside the other
+  // appearance settings so it survives refreshes and is used by the public page.
+  if (body.backgroundColor !== undefined) {
+    profileData.backgroundColor = body.backgroundColor || "#111111";
   }
 
   if (body.bannerUrl !== undefined) {

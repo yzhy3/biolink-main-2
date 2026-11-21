@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 
-export type WidgetGlyph = "valorant" | "discord" | "weather" | "clock";
+export type WidgetGlyph = "valorant" | "discord" | "weather" | "clock" | "spotify";
 
 /** White glyph drawn on a widget's colored tile. */
 export function WidgetGlyphIcon({ glyph }: { glyph: WidgetGlyph }) {
@@ -14,6 +14,9 @@ export function WidgetGlyphIcon({ glyph }: { glyph: WidgetGlyph }) {
         V
       </span>
     );
+  }
+  if (glyph === "spotify") {
+    return <span aria-hidden="true" className="text-[1.25em] font-black leading-none">♫</span>;
   }
   if (glyph === "weather") {
     return (

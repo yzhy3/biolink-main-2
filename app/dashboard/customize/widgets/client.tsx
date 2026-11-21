@@ -47,6 +47,12 @@ const WIDGET_META: WidgetMeta[] = [
     color: "rgb(255, 70, 85)",
     description: "Your Valorant rank and stats.",
   },
+  {
+    type: "spotify",
+    label: "Spotify",
+    color: "rgb(29, 185, 84)",
+    description: "Embed a Spotify track, album or playlist.",
+  },
 ];
 
 const WIDGET_ICONS: Record<string, React.ReactNode> = {
@@ -77,6 +83,7 @@ const WIDGET_ICONS: Record<string, React.ReactNode> = {
       <path d="M16 12h.01" />
     </svg>
   ),
+  spotify: <span className="text-xl font-black">♫</span>,
   valorant: (
     <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="10" />
@@ -341,8 +348,9 @@ function WidgetDialog({
         : "")
   );
   const [format, setFormat] = useState(state.config.format ?? "24");
+  const [spotifyUrl, setSpotifyUrl] = useState(state.config.url ?? "");
 
-  const atLimit = enabledCount >= 4 && !state.enabled;
+  const atLimit = enabledCount >= 6 && !state.enabled;
 
   const canConfirm = (() => {
     switch (meta.type) {
@@ -354,6 +362,8 @@ function WidgetDialog({
         return discordId.trim().length > 0;
       case "valorant":
         return riotId.trim().length > 0;
+      case "spotify":
+        return /(?:open\.spotify\.com\/(?:track|album|playlist)\/|spotify:(?:track|album|playlist):)[A-Za-z0-9]+/i.test(spotifyUrl.trim());
       default:
         return false;
     }
@@ -369,6 +379,8 @@ function WidgetDialog({
         return { discordId: discordId.trim() };
       case "valorant":
         return { riotId: riotId.trim() };
+      case "spotify":
+        return { url: spotifyUrl.trim() };
       default:
         return {};
     }
@@ -497,9 +509,17 @@ function WidgetDialog({
             </div>
           ) : null}
 
+          {meta.type === "spotify" ? (
+            <div className="space-y-2">
+              <label className={formLabel} htmlFor="spotify-url">Spotify track, album or playlist URL</label>
+              <input id="spotify-url" value={spotifyUrl} onChange={(e) => setSpotifyUrl(e.target.value)} placeholder="https://open.spotify.com/track/..." maxLength={200} className={inputClass} />
+              <p className="text-muted-foreground text-xs">This adds Spotify’s official embedded player. Playback starts when a visitor presses play.</p>
+            </div>
+          ) : null}
+
           {atLimit ? (
             <p className="text-destructive text-xs">
-              You can enable at most 4 widgets. Remove one first.
+              You can enable at most 6 widgets. Remove one first.
             </p>
           ) : null}
         </div>
