@@ -159,7 +159,7 @@ export async function PUT(req: Request) {
   if (body.backgroundUrl !== undefined) {
     profileData.backgroundUrl = body.backgroundUrl || null;
   }
-\n  // The profile editor submits this field; persist it alongside the other
+// The profile editor submits this field; persist it alongside the other
   // appearance settings so it survives refreshes and is used by the public page.
   if (body.backgroundColor !== undefined) {
     profileData.backgroundColor = body.backgroundColor || "#111111";
