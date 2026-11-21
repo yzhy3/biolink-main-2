@@ -357,10 +357,6 @@ export async function PUT(req: Request) {
     profileData.borderColor = body.borderColor;
   }
 
-  if (body.backgroundColor !== undefined) {
-    profileData.backgroundColor = body.backgroundColor;
-  }
-
   if (body.badgeColor !== undefined) {
     profileData.badgeColor = body.badgeColor;
   }
