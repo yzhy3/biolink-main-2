@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "egirls.lol — One link for your entire universe",
-  description: "egirls.lol is a customizable link-in-bio platform. Claim your /username page with avatar, socials, custom buttons, badges and analytics.",
+  title: "Biolink — Your identity, beautifully connected",
+  description: "Create a personalized bio link with social profiles, badges, music player, live widgets and custom profile decorations.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
