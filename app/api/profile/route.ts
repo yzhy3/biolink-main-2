@@ -41,6 +41,8 @@ type ProfileRequestBody = {
   showFeedback?: boolean | number;
   usernameColor?: string | null;
   avatarHidden?: boolean | number;
+  enterAnimation?: string;
+  avatarDecoration?: string;
   avatarShape?: string;
   location?: string | null;
   occupation?: string | null;
@@ -257,6 +259,16 @@ export async function PUT(req: Request) {
 
   if (body.avatarHidden !== undefined) {
     profileData.avatarHidden = body.avatarHidden ? 1 : 0;
+  }
+
+  if (body.enterAnimation !== undefined) {
+    const allowed = ["fade-up", "zoom", "slide-left", "flip", "none"];
+    profileData.enterAnimation = allowed.includes(body.enterAnimation) ? body.enterAnimation : "fade-up";
+  }
+
+  if (body.avatarDecoration !== undefined) {
+    const allowed = ["none", "emerald", "violet", "gold", "animated"];
+    profileData.avatarDecoration = allowed.includes(body.avatarDecoration) ? body.avatarDecoration : "none";
   }
 
   if (body.avatarShape !== undefined) {

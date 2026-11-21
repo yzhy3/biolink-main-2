@@ -175,6 +175,20 @@ export default function WidgetsClient({ widgets }: { widgets: WidgetState[] }) {
 
   return (
     <div className="space-y-6">
+      <section className="rounded-xl border border-[#1ed760]/20 bg-gradient-to-br from-[#1ed760]/[0.08] to-transparent p-4 sm:p-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <div className="mb-1 flex items-center gap-2 text-sm font-semibold text-white"><span className="grid size-7 place-items-center rounded-full bg-[#1ed760] text-black">♫</span> Spotify API integration</div>
+            <p className="max-w-2xl text-xs leading-5 text-white/55">To enable Spotify track metadata and API-powered previews, add your Spotify Developer credentials to your deployment environment. The embedded player itself also works with a Spotify URL.</p>
+          </div>
+          <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noreferrer" className="inline-flex h-9 shrink-0 items-center justify-center rounded-lg border border-[#1ed760]/30 bg-[#1ed760]/10 px-3 text-xs font-semibold text-[#9df5bd] transition hover:bg-[#1ed760]/20">Create Spotify app ↗</a>
+        </div>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          <code className="rounded-md border border-white/5 bg-black/30 px-3 py-2 text-[11px] text-white/70">SPOTIFY_CLIENT_ID</code>
+          <code className="rounded-md border border-white/5 bg-black/30 px-3 py-2 text-[11px] text-white/70">SPOTIFY_CLIENT_SECRET</code>
+        </div>
+        <p className="mt-2 text-[11px] text-white/40">Set both variables in Vercel → Project → Settings → Environment Variables, then redeploy. Never paste your Client Secret into a public profile or client-side code.</p>
+      </section>
       <nav className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {WIDGET_META.map((meta) => {
           const widget = state.find((w) => w.type === meta.type);

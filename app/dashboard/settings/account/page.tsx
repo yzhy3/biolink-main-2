@@ -50,7 +50,7 @@ export default async function SettingsAccountPage() {
       <Card>
         <CardHeader title="Account" description="Your account details.">
           <svg
-            className="text-pink-300 size-6"
+            className="text-green-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

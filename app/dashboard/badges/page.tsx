@@ -27,7 +27,7 @@ export default async function BadgesPage() {
 
         {!isPremium ? (
           <div
-            className="flex flex-col gap-[20px] rounded-lg border-2 border-pink-500/25 bg-cover bg-center p-[20px]"
+            className="flex flex-col gap-[20px] rounded-lg border-2 border-green-500/25 bg-cover bg-center p-[20px]"
             style={{ backgroundImage: "url(/gradient-background.png)" }}
           >
             <div className="flex min-w-0 flex-col gap-[7px]">

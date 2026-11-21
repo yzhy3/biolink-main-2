@@ -9,7 +9,7 @@ import type { WidgetState } from "@/lib/widget-types";
 type ModalState = null | { view: "picker" } | { view: "config"; type: string };
 
 const inputClass =
-  "w-full rounded-xl border border-[#1b1b1b] bg-[#080808] px-4 py-3 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-pink-400/40 focus:ring-2 focus:ring-pink-400/10";
+  "w-full rounded-xl border border-[#1b1b1b] bg-[#080808] px-4 py-3 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-green-400/40 focus:ring-2 focus:ring-green-400/10";
 
 const fieldLabelClass =
   "mb-2 block text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40";
@@ -49,7 +49,7 @@ function Toggle({
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       className={`relative h-7 w-12 shrink-0 rounded-full transition-colors duration-200 ${
-        checked ? "bg-pink-500" : "bg-[#2a2a2e]"
+        checked ? "bg-green-500" : "bg-[#2a2a2e]"
       }`}
     >
       <span

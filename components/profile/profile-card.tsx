@@ -55,6 +55,7 @@ export interface ProfileCardProfile {
   borderOpacity?: number | null;
   cardWidth?: number | null;
   avatarShape?: string | null;
+  avatarDecoration?: string | null;
   location?: string | null;
   occupation?: string | null;
   accentColor?: string | null;
@@ -68,6 +69,7 @@ export interface ProfileCardProfile {
   showViews?: number | boolean | null;
   showFeedback?: number | boolean | null;
   avatarHidden?: number | boolean | null;
+  enterAnimation?: string | null;
   viewsPosition?: string | null;
   badgesPosition?: string | null;
   customLayout?: string | null;
@@ -228,6 +230,7 @@ export default function ProfileCard({
     title: string;
     url: string;
   } | null>(null);
+  const [overlayRevealed, setOverlayRevealed] = useState(false);
 
   const askLink = (
     event: { preventDefault: () => void },
@@ -259,6 +262,13 @@ export default function ProfileCard({
   /* ---------------- settings ---------------- */
   const layout = profile?.layout ?? "centered";
   const template = getLayoutTemplate(layout);
+  const overlayEnabled = !preview && !editor && Number(profile?.overlayEnabled ?? 0) === 1;
+  const overlayText = profile?.overlayText?.trim() || "Click to show";
+  const enterAnimation = profile?.enterAnimation || "fade-up";
+  const entryAnimationStyle: CSSProperties = {
+    animation: enterAnimation === "none" ? "none" : `${enterAnimation} 650ms cubic-bezier(.2,.8,.2,1) both`,
+    transformOrigin: "center",
+  };
 
   const custom: CustomLayout | null = parseCustomLayout(profile?.customLayout);
   const useCustom = !!custom?.enabled;
@@ -394,6 +404,8 @@ export default function ProfileCard({
           avatarCfg.borderColor || "rgba(255, 255, 255, 0.4)"
         }`
       : undefined;
+  const avatarDecoration = profile?.avatarDecoration ?? "none";
+  const avatarDecorationShadow = avatarDecoration === "emerald" ? "0 0 0 3px rgba(52,211,153,.9), 0 0 22px rgba(52,211,153,.42)" : avatarDecoration === "violet" ? "0 0 0 3px rgba(167,139,250,.9), 0 0 22px rgba(167,139,250,.42)" : avatarDecoration === "gold" ? "0 0 0 3px rgba(251,191,36,.95), 0 0 22px rgba(251,191,36,.38)" : avatarDecoration === "animated" ? "0 0 0 3px rgba(103,232,249,.9), 0 0 24px rgba(103,232,249,.55)" : undefined;
 
   const avatarNode = avatarHidden ? null : (
     <Tooltip
@@ -407,12 +419,13 @@ export default function ProfileCard({
         <img
           src={profile.avatarUrl}
           alt={user.username}
-          className="object-cover ring-2 ring-white/10"
+          className={`object-cover ring-2 ring-white/10 ${avatarDecoration === "animated" ? "animate-pulse" : ""}`}
           style={{
             ...avatarStyle(avatarShape),
             width: `${avatarSize}px`,
             height: `${avatarSize}px`,
             outline: avatarBorder,
+            boxShadow: avatarDecorationShadow,
           }}
         />
       ) : (
@@ -424,6 +437,7 @@ export default function ProfileCard({
             width: `${avatarSize}px`,
             height: `${avatarSize}px`,
             outline: avatarBorder,
+            boxShadow: avatarDecorationShadow,
           }}
         >
           {displayName[0]?.toUpperCase() ?? "?"}
@@ -1004,16 +1018,32 @@ export default function ProfileCard({
 
     return (
       <ParallaxLayer depth={0} z={0}>
-        <TemplateComponent
-          user={user}
-          profile={profile}
-          badges={badges}
-          socials={socials}
-          links={links}
-          viewCount={viewCount}
-          preview={preview}
-          feedback={feedback}
-        />
+        <div className="profile-entry-animated relative mx-auto w-full" style={entryAnimationStyle}>
+          <TemplateComponent
+            user={user}
+            profile={profile}
+            badges={badges}
+            socials={socials}
+            links={links}
+            viewCount={viewCount}
+            preview={preview}
+            feedback={feedback}
+          />
+          {overlayEnabled && !overlayRevealed ? (
+            <button
+              type="button"
+              onClick={() => setOverlayRevealed(true)}
+              className="profile-click-reveal absolute inset-0 z-[80] flex min-h-[260px] items-center justify-center rounded-[inherit] border border-white/15 bg-[#080808]/90 px-6 text-center text-sm font-semibold tracking-wide text-white shadow-2xl backdrop-blur-xl transition-all duration-500 hover:bg-[#080808]/80 active:scale-[.985]"
+              aria-label="Reveal profile"
+            >
+              <span className="flex flex-col items-center gap-3">
+                <span className="grid size-12 place-items-center rounded-full border border-white/15 bg-white/10 text-xl">↗</span>
+                <span>{overlayText}</span>
+                <span className="text-[10px] font-medium uppercase tracking-[.28em] text-white/45">Tap / Click to enter</span>
+              </span>
+            </button>
+          ) : null}
+        </div>
       </ParallaxLayer>
     );
   }
@@ -1033,7 +1063,7 @@ export default function ProfileCard({
 
   return (
     <ParallaxLayer depth={0} z={0}>
-      <div className={cardClass} style={cardStyle} data-card-root>
+      <div className={`${cardClass} profile-entry-animated`} style={{ ...cardStyle, ...entryAnimationStyle }} data-card-root>
         {profile?.bannerUrl ? (
           <div
             aria-hidden="true"
@@ -1051,6 +1081,11 @@ export default function ProfileCard({
           />
         ) : null}
         {flowContent}
+        {overlayEnabled && !overlayRevealed ? (
+          <button type="button" onClick={() => setOverlayRevealed(true)} className="profile-click-reveal absolute inset-0 z-[80] flex items-center justify-center rounded-[inherit] border border-white/15 bg-[#080808]/90 px-6 text-center text-sm font-semibold text-white backdrop-blur-xl transition-all duration-500 hover:bg-[#080808]/80 active:scale-[.985]">
+            <span className="flex flex-col items-center gap-3"><span className="grid size-12 place-items-center rounded-full border border-white/15 bg-white/10 text-xl">↗</span><span>{overlayText}</span><span className="text-[10px] uppercase tracking-[.28em] text-white/45">Tap / Click to enter</span></span>
+          </button>
+        ) : null}
       </div>
       <LinkConfirm
         pending={pendingLink}

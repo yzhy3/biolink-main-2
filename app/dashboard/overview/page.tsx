@@ -127,11 +127,11 @@ export default async function OverviewPage() {
             {statCards.map((card) => (
               <div
                 key={card.label}
-                className="flex flex-col gap-3 rounded-lg border border-pink-500/25 bg-pink-600/[0.07] p-5 transition-colors hover:border-pink-500/45"
+                className="flex flex-col gap-3 rounded-lg border border-green-500/25 bg-green-600/[0.07] p-5 transition-colors hover:border-green-500/45"
               >
                 <div className="flex items-center justify-between">
                   <h1 className="m-0 text-[15px] font-[550] text-[#cfcfcf]">{card.label}</h1>
-                  <V3Icon name={card.icon} className="size-[22px] text-pink-400" />
+                  <V3Icon name={card.icon} className="size-[22px] text-green-400" />
                 </div>
                 <div>
                   <h1 className="m-0 truncate text-[24px] font-bold text-[#fafafa]">{card.value}</h1>
@@ -156,7 +156,7 @@ export default async function OverviewPage() {
             Account Analytics{" "}
             <a
               href="/dashboard/analytics"
-              className="rounded-md border border-pink-500/50 bg-pink-600 px-[11px] py-[6px] text-[13px] font-semibold text-white no-underline transition-colors hover:bg-pink-500"
+              className="rounded-md border border-green-500/50 bg-green-600 px-[11px] py-[6px] text-[13px] font-semibold text-white no-underline transition-colors hover:bg-green-500"
             >
               View More
             </a>
@@ -165,7 +165,7 @@ export default async function OverviewPage() {
             <div className="w-full min-w-0 flex-1 rounded-lg border border-[#1e1e1e] bg-[#111111] p-[15px]">
               <h1 className="m-0 text-[17px] text-[#fafafa]">
                 Profile Views in the last{" "}
-                <span className="bg-[linear-gradient(90deg,#f472b6,#fbcfe8)] bg-clip-text font-bold text-transparent">
+                <span className="bg-[linear-gradient(90deg,#86efac,#fbcfe8)] bg-clip-text font-bold text-transparent">
                   7 days
                 </span>
               </h1>
@@ -179,7 +179,7 @@ export default async function OverviewPage() {
             <div className="flex w-full min-w-0 flex-col gap-4 rounded-lg border border-[#1e1e1e] bg-[#111111] p-5 lg:max-w-[340px]">
               <h1 className="m-0 text-[17px] text-[#fafafa]">
                 Visitor Devices in the last{" "}
-                <span className="bg-[linear-gradient(90deg,#f472b6,#fbcfe8)] bg-clip-text font-bold text-transparent">
+                <span className="bg-[linear-gradient(90deg,#86efac,#fbcfe8)] bg-clip-text font-bold text-transparent">
                   7 days
                 </span>
               </h1>
@@ -202,7 +202,7 @@ export default async function OverviewPage() {
                       </div>
                       <div className="h-2.5 w-full overflow-hidden rounded-full bg-[#1b1b1b]">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-[#db2777] to-[#f472b6]"
+                          className="h-full rounded-full bg-gradient-to-r from-[#db2777] to-[#86efac]"
                           style={{ width: `${Math.round((n / deviceTotal) * 100)}%` }}
                         />
                       </div>

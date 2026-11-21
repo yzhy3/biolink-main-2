@@ -52,7 +52,7 @@ function Section({
     <section className="overflow-hidden rounded-lg border border-[#1b1b1b] bg-[#0d0d0d]">
       <div className="flex items-center gap-4 border-b border-[#1b1b1b] p-6">
         {icon && (
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-pink-500/10 text-pink-500">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-500/10 text-green-500">
             {icon}
           </div>
         )}
@@ -129,7 +129,7 @@ function Toggle({
       onClick={() => !locked && onChange(!enabled)}
       className={`relative h-7 w-12 shrink-0 rounded-full border transition-all duration-300 ${
         enabled
-          ? "border-pink-400/40 bg-pink-500"
+          ? "border-green-400/40 bg-green-500"
           : "border-[#292929] bg-[#181818]"
       } ${locked ? "cursor-not-allowed opacity-60" : ""}`}
     >
@@ -184,7 +184,7 @@ function UploadBox({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative h-10 w-10">
-              <div className="relative flex h-full w-full items-center justify-center rounded-xl bg-pink-500/20 text-pink-500 transition-all duration-300">
+              <div className="relative flex h-full w-full items-center justify-center rounded-xl bg-green-500/20 text-green-500 transition-all duration-300">
                 <div className="relative z-10">{icon}</div>
               </div>
             </div>
@@ -325,7 +325,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
 
   const [badgeCatalog, setBadgeCatalog] = useState<Badge[]>(allBadges);
   const [badgeName, setBadgeName] = useState("");
-  const [badgeColor, setBadgeColor] = useState("#f472b6");
+  const [badgeColor, setBadgeColor] = useState("#86efac");
   const [badgeIconUrl, setBadgeIconUrl] = useState("");
   const [badgeIconName, setBadgeIconName] = useState("fa-star");
   const [badgeIconPrefix, setBadgeIconPrefix] = useState("solid");
@@ -585,7 +585,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
 
       setBadgeCatalog((prev) => [nextBadge, ...prev]);
       setBadgeName("");
-      setBadgeColor("#f472b6");
+      setBadgeColor("#86efac");
       setBadgeIconUrl("");
       setBadgeIconName("fa-star");
       setBadgeIconPrefix("solid");
@@ -841,7 +841,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                       }}
                       className={`flex aspect-square items-center justify-center rounded-lg border transition-all hover:scale-105 ${
                         selected
-                          ? "border-pink-400/50 bg-pink-500/15 text-pink-300"
+                          ? "border-green-400/50 bg-green-500/15 text-green-300"
                           : "border-white/5 bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white"
                       }`}
                     >
@@ -870,7 +870,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                       }}
                       className={`flex aspect-square items-center justify-center rounded-lg border transition-all hover:scale-105 ${
                         selected
-                          ? "border-pink-400/50 bg-pink-500/15 text-pink-300"
+                          ? "border-green-400/50 bg-green-500/15 text-green-300"
                           : "border-white/5 bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white"
                       }`}
                     >
@@ -891,7 +891,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
               type="button"
               onClick={createBadge}
               disabled={isCreatingBadge}
-              className="rounded-xl bg-pink-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-pink-400 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-xl bg-green-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isCreatingBadge ? "Creating..." : "Create badge"}
             </button>
@@ -943,12 +943,12 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                   key={user.id}
                   onClick={() => openUser(user)}
                   className={`cursor-pointer transition-colors ${
-                    active ? "bg-pink-500/[0.06]" : "hover:bg-white/[0.01]"
+                    active ? "bg-green-500/[0.06]" : "hover:bg-white/[0.01]"
                   }`}
                 >
                   <td
                     className={`px-6 py-3 font-medium ${
-                      active ? "text-pink-400" : "text-white"
+                      active ? "text-green-400" : "text-white"
                     }`}
                   >
                     {user.username}
@@ -961,7 +961,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                     <span
                       className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
                         user.isAdmin
-                          ? "bg-pink-500/10 text-pink-400"
+                          ? "bg-green-500/10 text-green-400"
                           : "bg-white/5 text-white/40"
                       }`}
                     >
@@ -1056,7 +1056,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                 title="Account"
                 description="Login credentials and role"
                 icon={
-                  <svg className="h-5 w-5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.7c-2.676 0-5.216-.584-7.499-1.632z" />
                   </svg>
                 }
@@ -1124,7 +1124,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                 title="Profile"
                 description="Public information shown on this user's page"
                 icon={
-                  <svg className="h-5 w-5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0l7.35-7.35m0 0A5.25 5.25 0 0118 3.75l3.75-3.75M16.88 8.77l4.39 4.39" />
                   </svg>
                 }
@@ -1170,7 +1170,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="h-6 w-6 text-pink-500"
+                          className="h-6 w-6 text-green-500"
                         >
                           <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                           <circle cx="12" cy="7" r="4" />
@@ -1195,7 +1195,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="h-6 w-6 text-pink-500"
+                          className="h-6 w-6 text-green-500"
                         >
                           <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
                           <circle cx="9" cy="9" r="2" />
@@ -1213,14 +1213,14 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                 title="Badges"
                 description="Assign badges to the selected user"
                 icon={
-                  <svg className="h-5 w-5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18" />
                   </svg>
                 }
               >
                 {loadingUserBadges ? (
                   <div className="flex items-center justify-center gap-3 rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] px-4 py-6 text-sm text-white/60">
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-pink-500/30 border-t-pink-500" />
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-green-500/30 border-t-green-500" />
                     Loading badges...
                   </div>
                 ) : badgeCatalog.length === 0 ? (
@@ -1250,7 +1250,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                                     {badge.name}
                                   </span>
                                 </div>
-                                <span className="text-[10px] font-medium text-pink-400">Add</span>
+                                <span className="text-[10px] font-medium text-green-400">Add</span>
                               </div>
                             </button>
                           ))}
@@ -1274,7 +1274,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                                 className={`group rounded-lg border p-3 transition-all duration-300 ease-out ${
                                   hidden
                                     ? "border-[#1b1b1b] bg-[#0d0d0d] text-white/60 hover:border-white/20 hover:bg-[#111]"
-                                    : "border-pink-400/30 bg-pink-500/10 text-pink-400 hover:border-pink-400/50 hover:bg-pink-500/15"
+                                    : "border-green-400/30 bg-green-500/10 text-green-400 hover:border-green-400/50 hover:bg-green-500/15"
                                 }`}
                               >
                                 <div className="flex items-center justify-between gap-3">
@@ -1290,7 +1290,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                                       aria-checked={!hidden}
                                       onClick={() => updateBadgeVisibility(badge.id, !hidden)}
                                       className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full p-1 transition-colors ${
-                                        !hidden ? "bg-pink-500" : "bg-white/10 hover:bg-white/15"
+                                        !hidden ? "bg-green-500" : "bg-white/10 hover:bg-white/15"
                                       }`}
                                     >
                                       <span

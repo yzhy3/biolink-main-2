@@ -12,6 +12,7 @@ interface ProfileData {
   backgroundUrl: string | null;
   backgroundColor: string;
   avatarShape: string;
+  avatarDecoration: string;
   displayName: string;
   description: string;
   bio: string;
@@ -34,6 +35,7 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
   const [backgroundUrl, setBackgroundUrl] = useState(profile.backgroundUrl);
   const [backgroundColor, setBackgroundColor] = useState(profile.backgroundColor);
   const [avatarShape, setAvatarShape] = useState(profile.avatarShape);
+  const [avatarDecoration, setAvatarDecoration] = useState(profile.avatarDecoration);
   const [displayName, setDisplayName] = useState(profile.displayName);
   const [description, setDescription] = useState(profile.description);
   const [bio, setBio] = useState(profile.bio);
@@ -52,6 +54,7 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
       backgroundUrl: profile.backgroundUrl,
       backgroundColor: profile.backgroundColor,
       avatarShape: profile.avatarShape,
+      avatarDecoration: profile.avatarDecoration,
       displayName: profile.displayName,
       description: profile.description,
       bio: profile.bio,
@@ -66,6 +69,7 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
     backgroundUrl,
     backgroundColor,
     avatarShape,
+    avatarDecoration,
     displayName,
     description,
     bio,
@@ -84,6 +88,7 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
 
   const shapeRadius =
     SHAPES.find((shape) => shape.value === avatarShape)?.radius ?? "50px";
+  const decorationShadow = avatarDecoration === "emerald" ? "0 0 0 3px rgba(52,211,153,.9), 0 0 22px rgba(52,211,153,.42)" : avatarDecoration === "violet" ? "0 0 0 3px rgba(167,139,250,.9), 0 0 22px rgba(167,139,250,.42)" : avatarDecoration === "gold" ? "0 0 0 3px rgba(251,191,36,.95), 0 0 22px rgba(251,191,36,.38)" : avatarDecoration === "animated" ? "0 0 0 3px rgba(103,232,249,.9), 0 0 24px rgba(103,232,249,.55)" : undefined;
 
   async function save() {
     setSaving(true);
@@ -96,6 +101,7 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
           backgroundUrl: backgroundUrl || null,
           backgroundColor,
           avatarShape,
+          avatarDecoration,
           displayName,
           description,
           bio,
@@ -162,12 +168,12 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
                   alt="Avatar Image"
                   className="border-foreground/15 absolute inset-0 z-0 h-full w-full border-2 object-cover"
                   src={avatarUrl}
-                  style={{ borderRadius: shapeRadius }}
+                  style={{ borderRadius: shapeRadius, boxShadow: decorationShadow }}
                 />
               ) : (
                 <div
                   className="border-foreground/15 bg-foreground/5 text-muted-foreground absolute inset-0 z-0 grid place-content-center border-2"
-                  style={{ borderRadius: shapeRadius }}
+                  style={{ borderRadius: shapeRadius, boxShadow: decorationShadow }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -213,18 +219,29 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
                         onClick={() => setAvatarShape(shape.value)}
                         className={`rounded-xl inline-flex border items-center px-2.5 py-1 gap-x-1.5 transition-colors text-xs ${
                           active
-                            ? "border-pink-500/20 bg-pink-600/10 hover:bg-pink-600/15 text-pink-300"
+                            ? "border-green-500/20 bg-green-600/10 hover:bg-green-600/15 text-green-300"
                             : "border-foreground/5 bg-foreground/5 hover:bg-foreground/10 text-foreground"
                         }`}
                       >
                         <span
-                          className="bg-pink-300/70 inline-block size-3.5"
+                          className="bg-green-300/70 inline-block size-3.5"
                           style={{ borderRadius: shape.radius === "50px" ? "999px" : "3px" }}
                         />
                         {shape.label}
                       </button>
                     );
                   })}
+                </div>
+                <div className="space-y-2 pt-2">
+                  <label className="text-muted-foreground text-xs">Avatar Decoration</label>
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+                    {[{ value: "none", label: "None" }, { value: "emerald", label: "Emerald" }, { value: "violet", label: "Violet" }, { value: "gold", label: "Gold" }, { value: "animated", label: "Animated" }].map((item) => (
+                      <button key={item.value} type="button" aria-pressed={avatarDecoration === item.value} onClick={() => setAvatarDecoration(item.value)} className={`rounded-lg border px-2 py-2 text-xs transition-all ${avatarDecoration === item.value ? "border-green-500/50 bg-green-500/10 text-green-200" : "border-white/10 bg-white/[0.03] text-white/60 hover:border-white/20"}`}>
+                        <span className={`mx-auto mb-1 block size-5 rounded-full ${item.value === "emerald" ? "ring-2 ring-emerald-400 shadow-[0_0_12px_#34d399]" : item.value === "violet" ? "ring-2 ring-violet-400 shadow-[0_0_12px_#a78bfa]" : item.value === "gold" ? "ring-2 ring-amber-300 shadow-[0_0_12px_#fbbf24]" : item.value === "animated" ? "ring-2 ring-cyan-300 shadow-[0_0_12px_#67e8f9] animate-pulse" : "border border-white/20"}`} />
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

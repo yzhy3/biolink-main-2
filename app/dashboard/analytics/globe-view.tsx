@@ -30,12 +30,12 @@ export default function GlobeView({ points }: { points: GlobePoint[] }) {
           .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
           .bumpImageUrl("//unpkg.com/three-globe/example/img/earth-topology.png")
           .showAtmosphere(true)
-          .atmosphereColor("#f472b6")
+          .atmosphereColor("#86efac")
           .atmosphereAltitude(0.18)
           .pointsData(pointsRef.current)
           .pointLat((d: any) => (d as GlobePoint).lat)
           .pointLng((d: any) => (d as GlobePoint).lng)
-          .pointColor(() => "#f472b6")
+          .pointColor(() => "#86efac")
           .pointAltitude(0.02)
           .pointRadius((d: any) => {
             const c = (d as GlobePoint).count ?? 1;
@@ -43,7 +43,7 @@ export default function GlobeView({ points }: { points: GlobePoint[] }) {
           })
           .pointLabel(
             (d: any) =>
-              `<div style="font:600 12px Montserrat,sans-serif;color:#fff;background:#18181bcc;border:1px solid #f472b655;border-radius:8px;padding:4px 8px">${(d as GlobePoint).country} · ${(d as GlobePoint).count} views</div>`
+              `<div style="font:600 12px Montserrat,sans-serif;color:#fff;background:#18181bcc;border:1px solid #86efac55;border-radius:8px;padding:4px 8px">${(d as GlobePoint).country} · ${(d as GlobePoint).count} views</div>`
           );
       };
 

@@ -49,7 +49,7 @@ export default function CompletionCard({
             onClick={toggle}
             aria-expanded={open}
             aria-label={open ? "Collapse profile completion" : "Expand profile completion"}
-            className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-md border border-[#2a2a2a] bg-[#1a1a1a] text-[#bebebe] transition hover:border-pink-500/50 hover:text-white"
+            className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-md border border-[#2a2a2a] bg-[#1a1a1a] text-[#bebebe] transition hover:border-green-500/50 hover:text-white"
           >
             <V3Icon
               name="chevron-down"
@@ -60,7 +60,7 @@ export default function CompletionCard({
         <div className="flex items-center gap-[12px]">
           <div className="h-[18px] w-full min-w-0 flex-1 overflow-hidden rounded-full border border-[#232323] bg-[#1b1b1b]">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-[#db2777] to-[#f472b6] transition-all duration-500"
+              className="h-full rounded-full bg-gradient-to-r from-[#db2777] to-[#86efac] transition-all duration-500"
               style={{ width: `${completionPct}%` }}
             />
           </div>
@@ -93,7 +93,7 @@ export default function CompletionCard({
                 className="flex w-full items-center justify-between gap-[7px] rounded-md border-2 border-[#202020] bg-[#1a1a1a] p-[10px_12px] transition-colors hover:border-[#2c2c2c]"
               >
                 <div className="flex min-w-0 items-center">
-                  <span className={`grid size-8 shrink-0 place-content-center rounded-md ${item.done ? "bg-pink-600/25 text-pink-300" : "bg-[#222] text-[#707070]"}`}>
+                  <span className={`grid size-8 shrink-0 place-content-center rounded-md ${item.done ? "bg-green-600/25 text-green-300" : "bg-[#222] text-[#707070]"}`}>
                     <V3Icon name={item.icon} className="size-[18px]" />
                   </span>
                   <h1 className="m-0 truncate px-[10px] text-[15px] font-medium text-[#fafafa]">

@@ -52,6 +52,7 @@ export default async function CustomizeProfilePage() {
           backgroundUrl: profile?.backgroundUrl ?? null,
           backgroundColor: profile?.backgroundColor ?? "#111111",
           avatarShape: profile?.avatarShape ?? "circle",
+          avatarDecoration: profile?.avatarDecoration ?? "none",
           displayName: profile?.displayName ?? "",
           description: profile?.description ?? "",
           bio: profile?.bio ?? "",

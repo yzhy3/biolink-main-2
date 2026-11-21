@@ -166,7 +166,7 @@ export default function SettingsClient({
                       setError(null);
                       setUsernameOpen(true);
                     }}
-                    className="w-full cursor-pointer rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#2a2a2a] focus:border-pink-500/60"
+                    className="w-full cursor-pointer rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#2a2a2a] focus:border-green-500/60"
                   />
                 </div>
                 <button
@@ -204,7 +204,7 @@ export default function SettingsClient({
                       setError(null);
                       setDisplayOpen(true);
                     }}
-                    className="w-full cursor-pointer rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#2a2a2a] focus:border-pink-500/60"
+                    className="w-full cursor-pointer rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#2a2a2a] focus:border-green-500/60"
                   />
                 </div>
                 <button
@@ -274,7 +274,7 @@ export default function SettingsClient({
                     maxLength={72}
                     type={showEmail ? "text" : "password"}
                     value={email}
-                    className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_47px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-pink-500/60"
+                    className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_47px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-green-500/60"
                   />
                 </div>
               </div>
@@ -371,7 +371,7 @@ export default function SettingsClient({
                   maxLength={16}
                   value={usernameDraft}
                   onChange={(e) => setUsernameDraft(e.target.value)}
-                  className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-pink-500/60"
+                  className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-green-500/60"
                 />
               </div>
               {error ? <p className="m-0 mt-2 text-[13px] text-[#f87171]">{error}</p> : null}
@@ -403,7 +403,7 @@ export default function SettingsClient({
                   maxLength={40}
                   value={displayDraft}
                   onChange={(e) => setDisplayDraft(e.target.value)}
-                  className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-pink-500/60"
+                  className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-green-500/60"
                 />
               </div>
               {error ? <p className="m-0 mt-2 text-[13px] text-[#f87171]">{error}</p> : null}
@@ -442,7 +442,7 @@ export default function SettingsClient({
               <h3 className="m-0 mt-1 text-[14px] font-normal text-[#a1a1a1]">
                 Use alias credits to create extra usernames that redirect to your main profile.
               </h3>
-              <a href="/dashboard/premium" className="mt-3 block rounded-lg border-2 border-pink-500/60 bg-pink-600 p-3 text-center text-[14px] font-medium text-white no-underline">
+              <a href="/dashboard/premium" className="mt-3 block rounded-lg border-2 border-green-500/60 bg-green-600 p-3 text-center text-[14px] font-medium text-white no-underline">
                 Upgrade to Premium for {5} Alias slots
               </a>
               <div className="mt-3 flex flex-wrap gap-2 text-[13px]">
@@ -453,7 +453,7 @@ export default function SettingsClient({
                   {aliases.length}/{slots} Alias Slots Used
                 </span>
                 {isPremium ? (
-                  <span className="rounded-full border border-pink-500/60 bg-pink-600 px-3 py-1 text-white">Premium</span>
+                  <span className="rounded-full border border-green-500/60 bg-green-600 px-3 py-1 text-white">Premium</span>
                 ) : null}
               </div>
               <div className="mt-3 flex flex-col gap-2">
@@ -496,7 +496,7 @@ export default function SettingsClient({
                     maxLength={16}
                     value={aliasDraft}
                     onChange={(e) => setAliasDraft(e.target.value)}
-                    className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-pink-500/60"
+                    className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-green-500/60"
                   />
                 </div>
                 {error ? <p className="m-0 mt-2 text-[13px] text-[#f87171]">{error}</p> : null}

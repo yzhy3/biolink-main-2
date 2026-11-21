@@ -45,7 +45,7 @@ const RANGES = [
 const RANGE_DAYS: Record<string, number> = { "24h": 1, "3d": 3, "7d": 7, "14d": 14 };
 
 const DEVICE_DOT: Record<string, string> = {
-  Desktop: "bg-pink-500",
+  Desktop: "bg-green-500",
   Mobile: "bg-[#5661f6]",
   Tablet: "bg-[#22d3ee]",
   Bot: "bg-[#525252]",
@@ -56,7 +56,7 @@ function Bar({ pct }: { pct: number }) {
   return (
     <div className="h-2 w-full overflow-hidden rounded-full bg-[#1c1c1c]">
       <div
-        className="h-full rounded-full bg-gradient-to-r from-[#db2777] to-[#f472b6] transition-all duration-500"
+        className="h-full rounded-full bg-gradient-to-r from-[#db2777] to-[#86efac] transition-all duration-500"
         style={{ width: `${Math.min(100, Math.max(0, pct))}%` }}
       />
     </div>
@@ -78,7 +78,7 @@ function Empty({ title, sub }: { title: string; sub: string }) {
 function deltaChip(count: number, prev: number) {
   if (prev <= 0) {
     return count > 0 ? (
-      <span className="rounded border border-pink-500/40 bg-pink-600/15 px-1.5 py-0.5 text-[11px] font-bold text-pink-300">
+      <span className="rounded border border-green-500/40 bg-green-600/15 px-1.5 py-0.5 text-[11px] font-bold text-green-300">
         NEW
       </span>
     ) : null;
@@ -96,7 +96,7 @@ function deltaChip(count: number, prev: number) {
     <span
       className={`rounded border px-1.5 py-0.5 text-[11px] font-bold ${
         up
-          ? "border-pink-500/40 bg-pink-600/15 text-pink-300"
+          ? "border-green-500/40 bg-green-600/15 text-green-300"
           : "border-[#2a2a2a] bg-[#1a1a1a] text-[#8a8a8a]"
       }`}
     >
@@ -170,7 +170,7 @@ export default function AnalyticsClient({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="m-0 flex items-center gap-2 text-[20px] font-semibold text-[#f2f2f2]">
-              <V3Icon name="analytics" className="size-5 text-pink-400" />
+              <V3Icon name="analytics" className="size-5 text-green-400" />
               Account Analytics
             </h1>
             <p className="m-0 mt-1 text-[14px] text-[#8a8a8a]">
@@ -186,7 +186,7 @@ export default function AnalyticsClient({
                 aria-pressed={activeRange === r.id}
                 className={`cursor-pointer rounded px-3 py-1.5 text-[12px] font-bold transition-colors ${
                   activeRange === r.id
-                    ? "bg-pink-600 text-white"
+                    ? "bg-green-600 text-white"
                     : "text-[#8a8a8a] hover:bg-[#1a1a1a] hover:text-white"
                 }`}
               >
@@ -199,7 +199,7 @@ export default function AnalyticsClient({
           <div className="mt-4 flex flex-wrap gap-2 border-t border-[#1e1e1e] pt-4">
             {topCountry ? (
               <span className="inline-flex items-center gap-1.5 rounded border border-[#222] bg-[#0c0c0c] px-2.5 py-1.5 text-[12px] text-[#bebebe]">
-                <span className="font-semibold text-pink-300">{topCountry.pct}%</span> of views from {COUNTRY_NAMES[topCountry.country] ?? topCountry.country}
+                <span className="font-semibold text-green-300">{topCountry.pct}%</span> of views from {COUNTRY_NAMES[topCountry.country] ?? topCountry.country}
               </span>
             ) : null}
             {topReferrer ? (
@@ -222,11 +222,11 @@ export default function AnalyticsClient({
         {statCards.map((card) => (
           <div
             key={card.label}
-            className="rounded-lg border border-[#1e1e1e] bg-[#111111] p-4 transition-colors hover:border-pink-500/30"
+            className="rounded-lg border border-[#1e1e1e] bg-[#111111] p-4 transition-colors hover:border-green-500/30"
           >
             <div className="flex items-center justify-between gap-2">
               <p className="m-0 text-[13px] font-medium text-[#9a9a9a]">{card.label}</p>
-              <span className="grid size-8 place-content-center rounded-md bg-pink-600/15 text-pink-400">
+              <span className="grid size-8 place-content-center rounded-md bg-green-600/15 text-green-400">
                 <V3Icon name={card.icon} className="size-4" />
               </span>
             </div>
@@ -289,7 +289,7 @@ export default function AnalyticsClient({
             <div className="mt-3 flex flex-col gap-2">
               {topSocials.map((s, i) => (
                 <div key={s.id} className="flex items-center gap-3 rounded-md border border-[#1d1d1d] bg-[#141414] p-3">
-                  <span className="grid size-8 shrink-0 place-content-center rounded-md bg-pink-600/20 text-[13px] font-bold text-pink-300">
+                  <span className="grid size-8 shrink-0 place-content-center rounded-md bg-green-600/20 text-[13px] font-bold text-green-300">
                     {i + 1}
                   </span>
                   <div className="min-w-0 flex-1">
@@ -309,7 +309,7 @@ export default function AnalyticsClient({
           <div className="flex items-center justify-between gap-2">
             <h2 className="m-0 text-[16px] font-semibold text-white">Most Clicked Links</h2>
             {isPremium ? (
-            <span className="flex shrink-0 items-center gap-1 rounded-full border border-pink-500/50 bg-pink-600/20 px-2 py-1 text-[11px] font-semibold text-white">
+            <span className="flex shrink-0 items-center gap-1 rounded-full border border-green-500/50 bg-green-600/20 px-2 py-1 text-[11px] font-semibold text-white">
               <V3Icon name="crown" className="size-3" />
               Premium
             </span>
@@ -344,12 +344,12 @@ export default function AnalyticsClient({
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h2 className="m-0 flex items-center gap-2 text-[16px] font-semibold text-white">
-              <V3Icon name="globe" className="size-4 text-pink-400" />
+              <V3Icon name="globe" className="size-4 text-green-400" />
               Visitor Globe
             </h2>
             <p className="m-0 mt-0.5 text-[13px] text-[#7a7a7a]">Drag to spin · scroll to zoom · pink dots are visits</p>
           </div>
-          <span className="rounded-full border border-pink-500/50 bg-pink-600/20 px-2.5 py-1 text-[12px] font-medium tabular-nums text-pink-200">
+          <span className="rounded-full border border-green-500/50 bg-green-600/20 px-2.5 py-1 text-[12px] font-medium tabular-nums text-green-200">
             {globePoints.length} {globePoints.length === 1 ? "marker" : "markers"}
           </span>
         </div>

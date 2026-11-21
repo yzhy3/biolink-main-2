@@ -47,6 +47,7 @@ export interface AppearanceData {
   glowEnabled: number | boolean | null;
   overlayEnabled: number | boolean | null;
   overlayText: string | null;
+  enterAnimation?: string | null;
   avatarUrl: string | null;
   backgroundUrl: string | null;
   description: string | null;
@@ -65,6 +66,10 @@ const TEMPLATES = [
   { id: "classic", label: "Classic", blur: 0, radius: 0 },
   { id: "frosted-square", label: "Frosted Square", blur: 10, radius: 15 },
   { id: "frosted-soft", label: "Frosted Soft", blur: 20, radius: 30 },
+  { id: "glass", label: "Glass", blur: 14, radius: 24 },
+  { id: "rounded", label: "Rounded", blur: 8, radius: 24 },
+  { id: "soft-glass", label: "Soft Glass", blur: 24, radius: 40 },
+  { id: "sharp", label: "Sharp", blur: 4, radius: 4 },
 ] as const;
 
 const DEFAULTS = {
@@ -96,7 +101,7 @@ function crown() {
 
 function PremiumChip() {
   return (
-    <span className="flex items-center gap-1 rounded-full border border-pink-500/40 bg-pink-600/15 px-1.5 py-0.5 text-[10px] font-semibold text-pink-300">
+    <span className="flex items-center gap-1 rounded-full border border-green-500/40 bg-green-600/15 px-1.5 py-0.5 text-[10px] font-semibold text-green-300">
       {crown()} Premium
     </span>
   );
@@ -108,7 +113,7 @@ function PremiumButton({ label }: { label: string }) {
     <button
       type="button"
       onClick={() => router.push("/dashboard/premium")}
-      className="border-foreground/10 text-muted-foreground hover:border-pink-500/40 hover:text-foreground hover:bg-pink-600/5 flex w-full items-center justify-between gap-2 rounded-md border border-dashed bg-transparent px-3 py-2.5 text-sm font-medium transition-colors"
+      className="border-foreground/10 text-muted-foreground hover:border-green-500/40 hover:text-foreground hover:bg-green-600/5 flex w-full items-center justify-between gap-2 rounded-md border border-dashed bg-transparent px-3 py-2.5 text-sm font-medium transition-colors"
     >
       <span className="flex items-center gap-2">
         {crown()}
@@ -152,7 +157,7 @@ function SliderRow({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="accent-pink-600 w-full"
+        className="accent-green-600 w-full"
       />
     </div>
   );
@@ -182,7 +187,7 @@ export default function AppearanceClient({
   const router = useRouter();
   const { pushToast } = useToastStack();
 
-  const [layout, setLayout] = useState<string>(profile?.layout ?? "halo");
+  const [layout, setLayout] = useState<string>(profile?.layout && ["halo", "classic", "compact", "wide"].includes(profile.layout) ? profile.layout : "halo");
   const customActive =
     !!profile?.customLayout &&
     (() => {
@@ -217,6 +222,7 @@ export default function AppearanceClient({
   const [glowEnabled, setGlowEnabled] = useState(Number(profile?.glowEnabled ?? 0) !== 0);
   const [overlayEnabled, setOverlayEnabled] = useState(Number(profile?.overlayEnabled ?? 0) !== 0);
   const [overlayText, setOverlayText] = useState(profile?.overlayText ?? "Click to show");
+  const [enterAnimation, setEnterAnimation] = useState((profile as AppearanceData & { enterAnimation?: string | null })?.enterAnimation ?? "fade-up");
 
   const [saving, setSaving] = useState<string | null>(null);
   const [previewMounted, setPreviewMounted] = useState(false);
@@ -276,7 +282,7 @@ export default function AppearanceClient({
           description="Pick how your profile card is presented to visitors."
         >
           <svg
-            className="text-pink-300 size-6"
+            className="text-green-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -290,62 +296,45 @@ export default function AppearanceClient({
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <button
-              type="button"
-              onClick={() => setLayout("halo")}
-              className={`border-foreground/5 bg-input/30 flex items-center gap-3 rounded-lg border p-3 text-left transition-all hover:border-white/15 ${
-                layout === "halo" && !customActive ? "border-pink-500/40 bg-pink-600/10" : ""
-              }`}
-            >
-              <CardTile size="md">
-                <div className="bg-pink-600 size-5 rounded-full" />
-              </CardTile>
-              <div className="min-w-0">
-                <p className="text-foreground text-sm font-semibold">Halo</p>
-                <p className="text-muted-foreground truncate text-xs">
-                  Classic centered card with halo glow.
-                </p>
-              </div>
-            </button>
-
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {[
+              { id: "halo", name: "Halo", detail: "Balanced glass card", icon: "◉" },
+              { id: "classic", name: "Classic", detail: "Solid minimal profile", icon: "▣" },
+              { id: "compact", name: "Compact", detail: "Smaller, tighter card", icon: "▤" },
+              { id: "wide", name: "Wide", detail: "Expanded profile layout", icon: "▭" },
+            ].map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setLayout(item.id)}
+                className={`border-foreground/5 bg-input/30 flex min-h-[112px] flex-col items-start gap-3 rounded-lg border p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-green-500/30 ${layout === item.id && !customActive ? "border-green-500/40 bg-green-600/10" : ""}`}
+              >
+                <div className="flex w-full items-center justify-between">
+                  <CardTile size="md"><span className="text-lg text-green-300">{item.icon}</span></CardTile>
+                  {layout === item.id && !customActive ? <span className="text-[10px] font-semibold uppercase tracking-wider text-green-300">Selected</span> : null}
+                </div>
+                <div className="min-w-0"><p className="text-foreground text-sm font-semibold">{item.name}</p><p className="text-muted-foreground text-xs">{item.detail}</p></div>
+              </button>
+            ))}
             <button
               type="button"
               disabled={!isPremium}
               onClick={() => router.push("/dashboard/customize/edit")}
-              className={`border-foreground/5 bg-input/30 flex items-center gap-3 rounded-lg border p-3 text-left transition-all hover:border-white/15 disabled:cursor-not-allowed disabled:opacity-60 ${
-                customActive ? "border-pink-500/40 bg-pink-600/10" : ""
-              }`}
+              className={`border-foreground/5 bg-input/30 flex min-h-[112px] items-start gap-3 rounded-lg border p-3 text-left transition-all hover:border-green-500/30 disabled:cursor-not-allowed disabled:opacity-60 ${customActive ? "border-green-500/40 bg-green-600/10" : ""}`}
             >
-              <CardTile size="md">
-                <div className="grid size-5 grid-cols-2 gap-0.5">
-                  <div className="bg-pink-600/80 rounded-sm" />
-                  <div className="border-pink-500/60 rounded-sm border" />
-                  <div className="border-pink-500/60 rounded-sm border" />
-                  <div className="bg-pink-600/80 rounded-sm" />
-                </div>
-              </CardTile>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <p className="text-foreground text-sm font-semibold">Custom</p>
-                  {!isPremium ? <PremiumChip /> : null}
-                </div>
-                <p className="text-muted-foreground truncate text-xs">
-                  Free-move canvas — drag, resize and style everything.
-                </p>
-              </div>
+              <CardTile size="md"><span className="grid size-5 grid-cols-2 gap-0.5"><span className="rounded-sm bg-green-600/80" /><span className="rounded-sm border border-green-500/60" /><span className="rounded-sm border border-green-500/60" /><span className="rounded-sm bg-green-600/80" /></span></CardTile>
+              <span className="min-w-0"><span className="flex items-center gap-2"><span className="text-foreground text-sm font-semibold">Custom</span>{!isPremium ? <PremiumChip /> : null}</span><span className="text-muted-foreground block text-xs">Free-move editor</span></span>
             </button>
           </div>
-
           {!isPremium ? (
-            <div className="from-pink-600/20 via-pink-600/5 flex items-center justify-between gap-3 rounded-md border border-pink-500/25 bg-gradient-to-r to-transparent p-3">
+            <div className="from-green-600/20 via-green-600/5 flex items-center justify-between gap-3 rounded-md border border-green-500/25 bg-gradient-to-r to-transparent p-3">
               <p className="text-foreground/80 text-xs">
                 Unlock the free-move canvas editor with Premium.
               </p>
               <button
                 type="button"
                 onClick={() => router.push("/dashboard/premium")}
-                className="bg-pink-600 hover:bg-pink-500 flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold text-white transition-colors"
+                className="bg-green-600 hover:bg-green-500 flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold text-white transition-colors"
               >
                 {crown()} Upgrade
               </button>
@@ -357,7 +346,7 @@ export default function AppearanceClient({
               type="button"
               disabled={saving !== null}
               onClick={() =>
-                save({ layout: "halo", customLayout: null }, "layout")
+                save({ layout, customLayout: null }, "layout")
               }
               className={btnGradient}
             >
@@ -374,7 +363,7 @@ export default function AppearanceClient({
           description="Control the shape, size and frost of your card."
         >
           <svg
-            className="text-pink-300 size-6"
+            className="text-green-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -400,7 +389,7 @@ export default function AppearanceClient({
                     setCardBlurEnabled(template.blur > 0);
                   }}
                   className={`border-foreground/5 bg-input/30 flex flex-col items-center gap-2 rounded-lg border p-3 transition-all hover:border-white/15 ${
-                    active ? "border-pink-500/40 bg-pink-600/10" : ""
+                    active ? "border-green-500/40 bg-green-600/10" : ""
                   }`}
                 >
                   <div
@@ -410,9 +399,9 @@ export default function AppearanceClient({
                       backdropFilter: template.blur > 0 ? `blur(${template.blur}px)` : undefined,
                     }}
                   >
-                    <div className="bg-pink-600 size-3 rounded-full" />
+                    <div className="bg-green-600 size-3 rounded-full" />
                   </div>
-                  <p className={`text-xs font-semibold ${active ? "text-pink-300" : "text-foreground"}`}>
+                  <p className={`text-xs font-semibold ${active ? "text-green-300" : "text-foreground"}`}>
                     {template.label}
                   </p>
                 </button>
@@ -532,7 +521,7 @@ export default function AppearanceClient({
           description="Tint every part of your profile card."
         >
           <svg
-            className="text-pink-300 size-6"
+            className="text-green-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -632,7 +621,7 @@ export default function AppearanceClient({
           description="Extra flair for your profile."
         >
           <svg
-            className="text-pink-300 size-6"
+            className="text-green-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -790,7 +779,7 @@ export default function AppearanceClient({
           description="A spoiler overlay that hides your card until clicked."
         >
           <svg
-            className="text-pink-300 size-6"
+            className="text-green-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -825,6 +814,17 @@ export default function AppearanceClient({
             </div>
           ) : null}
 
+          <div className="space-y-2">
+            <label className={formLabel} htmlFor="enter-animation">Profile entrance animation</label>
+            <select id="enter-animation" value={enterAnimation} onChange={(e) => setEnterAnimation(e.target.value)} className={inputClass}>
+              <option value="fade-up">Fade up</option>
+              <option value="zoom">Zoom in</option>
+              <option value="slide-left">Slide from right</option>
+              <option value="flip">3D flip</option>
+              <option value="none">No animation</option>
+            </select>
+            <p className="text-muted-foreground text-xs">Plays when the profile loads. The click-to-enter overlay uses a separate reveal transition.</p>
+          </div>
           <div className="flex justify-end">
             <button
               type="button"
@@ -834,6 +834,7 @@ export default function AppearanceClient({
                   {
                     overlayEnabled: overlayEnabled ? 1 : 0,
                     overlayText,
+                    enterAnimation,
                   },
                   "overlay"
                 )

@@ -135,6 +135,7 @@ export default async function CustomizeAppearancePage() {
                 glowEnabled: profile.glowEnabled,
                 overlayEnabled: profile.overlayEnabled,
                 overlayText: profile.overlayText,
+                enterAnimation: profile.enterAnimation,
                 avatarUrl: profile.avatarUrl,
                 backgroundUrl: profile.backgroundUrl,
                 description: profile.description,

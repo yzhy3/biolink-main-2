@@ -134,7 +134,9 @@ export async function ensureProfileSchema() {
       ADD COLUMN IF NOT EXISTS gradient_secondary TEXT NOT NULL DEFAULT '#0d0d0d',
       ADD COLUMN IF NOT EXISTS show_feedback INTEGER NOT NULL DEFAULT 1,
       ADD COLUMN IF NOT EXISTS username_color TEXT,
-      ADD COLUMN IF NOT EXISTS avatar_hidden INTEGER NOT NULL DEFAULT 0`;
+      ADD COLUMN IF NOT EXISTS avatar_hidden INTEGER NOT NULL DEFAULT 0,
+      ADD COLUMN IF NOT EXISTS enter_animation TEXT NOT NULL DEFAULT 'fade-up',
+      ADD COLUMN IF NOT EXISTS avatar_decoration TEXT NOT NULL DEFAULT 'none'`;
   } catch (error) {
     console.error("ensureProfileSchema error:", error);
   }

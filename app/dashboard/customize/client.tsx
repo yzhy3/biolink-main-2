@@ -99,7 +99,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       className={`relative inline-flex h-[26px] w-[56px] shrink-0 cursor-pointer items-center rounded-[32px] border-2 transition-colors duration-200 ${
-        checked ? "border-pink-600 bg-pink-600" : "border-[#2a2a2a] bg-[#181818] hover:border-[#3a3a3a]"
+        checked ? "border-green-600 bg-green-600" : "border-[#2a2a2a] bg-[#181818] hover:border-[#3a3a3a]"
       }`}
     >
       <span
@@ -115,7 +115,7 @@ const SECTION_LABEL = "ml-[5px] text-[22.5px] font-[600] text-[#bebebe]";
 const CARD = "mt-[15px] flex flex-wrap justify-around gap-[15px] rounded-lg border border-[#1e1e1e] bg-[#111111] p-[15px]";
 const ROW = "flex w-full items-start gap-[15px] max-[900px]:flex-col";
 const FIELD_LABEL = "m-0 mb-[5.5px] ml-[3px] text-[16px] font-[500] text-[#dddddd]";
-const INPUT = "w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-pink-500/60";
+const INPUT = "w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-green-500/60";
 const INPUT_WRAP = "relative flex w-full items-center rounded-lg";
 const INPUT_ICON = "absolute left-[8px] z-10 flex items-center text-[25px] text-[#666666]";
 
@@ -159,7 +159,7 @@ function ColorRow({
             setText(v);
             if (/^#[0-9a-fA-F]{6}$/.test(v)) onChange(v);
           }}
-          className="w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] tracking-[0.5px] text-[#eee] caret-[#f7f7f7] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-pink-500/60"
+          className="w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] tracking-[0.5px] text-[#eee] caret-[#f7f7f7] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-green-500/60"
         />
       </div>
       <Modal
@@ -430,21 +430,11 @@ export default function CustomizeClient({
 
   return (
     <div className="flex w-full flex-col">
-      <div className="sticky top-2 z-30 mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#292929] bg-[#111111]/95 p-3 shadow-xl backdrop-blur-md">
-        <div className="min-w-0">
-          <span className={SECTION_LABEL}>Customize</span>
-          <p className={`ml-[5px] mt-1 text-xs ${dirty ? "text-amber-300" : "text-emerald-400"}`} aria-live="polite">
-            {dirty ? "You have unsaved changes" : "All changes saved"}
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={save}
-          disabled={saving || !dirty}
-          className={`${modalPrimaryBtn} min-w-[145px] shrink-0 disabled:cursor-not-allowed disabled:opacity-45`}
-        >
-          {saving ? "Saving…" : dirty ? "Save Changes" : "Saved"}
-        </button>
+      <div className="mb-5 min-w-0">
+        <span className={SECTION_LABEL}>Customize</span>
+        <p className="ml-[5px] mt-1 text-xs text-white/40" aria-live="polite">
+          Changes are saved when you press Save Changes.
+        </p>
       </div>
 
       <section>
@@ -512,8 +502,8 @@ export default function CustomizeClient({
       </section>
 
       <a href="/dashboard/premium" className="no-underline">
-        <div className="mt-[15px] flex w-full cursor-pointer items-center gap-3 rounded-md border border-pink-500/30 bg-pink-600/10 p-3 text-white transition-[0.2s] hover:border-pink-500/50 hover:bg-pink-600/20 active:translate-y-[2px]">
-          <span className="grid size-10 shrink-0 place-content-center rounded-md bg-pink-600/25 text-pink-300">
+        <div className="mt-[15px] flex w-full cursor-pointer items-center gap-3 rounded-md border border-green-500/30 bg-green-600/10 p-3 text-white transition-[0.2s] hover:border-green-500/50 hover:bg-green-600/20 active:translate-y-[2px]">
+          <span className="grid size-10 shrink-0 place-content-center rounded-md bg-green-600/25 text-green-300">
             <Icon svg={iconSvg.crown} className="text-[20px]" />
           </span>
           <span className="min-w-0 text-[14.5px] font-[600] leading-snug">
@@ -646,7 +636,7 @@ export default function CustomizeClient({
               )}
               {overlayEnabled && (
                 <div className={`${INPUT_WRAP} mt-3`}>
-                  <input type="text" maxLength={60} placeholder="Click to show" value={overlayText} onChange={(e) => setOverlayText(e.target.value)} className="w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px] text-[15px] text-[#eee] outline-none transition-[0.3s] hover:border-[#191919] focus:border-pink-500/60" />
+                  <input type="text" maxLength={60} placeholder="Click to show" value={overlayText} onChange={(e) => setOverlayText(e.target.value)} className="w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px] text-[15px] text-[#eee] outline-none transition-[0.3s] hover:border-[#191919] focus:border-green-500/60" />
                 </div>
               )}
             </div>
@@ -663,12 +653,12 @@ export default function CustomizeClient({
               onClick={() => setLayout("halo")}
               className={`flex w-full cursor-pointer items-center gap-[10px] rounded-md border-2 p-[12px] text-left transition-[0.2s] active:translate-y-[2px] ${
                 layout === "halo" && !customActive
-                  ? "border-pink-500/70 bg-pink-600/20"
+                  ? "border-green-500/70 bg-green-600/20"
                   : "border-transparent bg-[#0c0c0c] hover:border-[#2a2a2a]"
               }`}
             >
-              <span className="grid size-10 shrink-0 place-content-center rounded-md bg-pink-600/20">
-                <span className="size-5 rounded-full bg-pink-500" />
+              <span className="grid size-10 shrink-0 place-content-center rounded-md bg-green-600/20">
+                <span className="size-5 rounded-full bg-green-500" />
               </span>
               <span className="min-w-0">
                 <span className="block text-[15px] font-[500] text-[#f0f0f0]">Halo</span>
@@ -681,15 +671,15 @@ export default function CustomizeClient({
               onClick={() => router.push("/dashboard/customize/edit")}
               className={`flex w-full cursor-pointer items-center gap-[10px] rounded-md border-2 p-[12px] text-left transition-[0.2s] active:translate-y-[2px] ${
                 customActive
-                  ? "border-pink-500/70 bg-pink-600/20"
+                  ? "border-green-500/70 bg-green-600/20"
                   : "border-transparent bg-[#0c0c0c] hover:border-[#2a2a2a]"
               }`}
             >
               <span className="grid size-10 shrink-0 grid-cols-2 place-content-center gap-0.5 rounded-md bg-[#0c0c0c] p-2">
-                <span className="rounded-sm bg-pink-500/80" />
-                <span className="rounded-sm border border-pink-500/60" />
-                <span className="rounded-sm border border-pink-500/60" />
-                <span className="rounded-sm bg-pink-500/80" />
+                <span className="rounded-sm bg-green-500/80" />
+                <span className="rounded-sm border border-green-500/60" />
+                <span className="rounded-sm border border-green-500/60" />
+                <span className="rounded-sm bg-green-500/80" />
               </span>
               <span className="min-w-0 flex-1">
                 <span className="flex items-center gap-2 text-[15px] font-[500] text-[#f0f0f0]">
@@ -785,18 +775,23 @@ export default function CustomizeClient({
 
       <div
         aria-hidden={!dirty}
-        className={`pointer-events-none fixed inset-x-3 bottom-3 z-40 transition-all duration-200 ${
-          dirty ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
+        className={`pointer-events-none fixed inset-x-0 bottom-0 z-50 px-3 pb-[max(12px,env(safe-area-inset-bottom))] transition-all duration-300 ${
+          dirty ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         }`}
       >
-        <div className="pointer-events-auto mx-auto flex w-full max-w-xl items-center justify-between gap-3 rounded-[999px] border-2 border-[#232323] bg-[#141414] py-2 pl-5 pr-2">
-          <h1 className="m-0 min-w-0 flex-1 truncate text-[15px] font-semibold text-white">You have unsaved changes!</h1>
-          <button type="button" onClick={reset} className="shrink-0 cursor-pointer whitespace-nowrap bg-transparent px-3 py-2.5 text-[15px] text-[#8a8a8a] transition hover:text-white" style={{ fontWeight: 300 }}>
-            Reset
-          </button>
-          <button type="button" onClick={save} disabled={saving} className={`${modalPrimaryBtn} shrink-0 whitespace-nowrap`} style={{ borderRadius: 999, fontWeight: 300 }}>
-            {saving ? "Saving…" : "Save Changes"}
-          </button>
+        <div className="pointer-events-auto mx-auto flex w-full max-w-2xl flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-[#171719]/95 p-3 shadow-[0_12px_50px_rgba(0,0,0,.55)] backdrop-blur-xl sm:flex-nowrap sm:rounded-full sm:py-2 sm:pl-5 sm:pr-2">
+          <div className="min-w-0 flex-1 basis-full sm:basis-auto">
+            <p className="m-0 truncate text-sm font-semibold text-white">Unsaved changes</p>
+            <p className="m-0 text-xs text-white/45">Save to publish your updates</p>
+          </div>
+          <div className="flex w-full shrink-0 items-center gap-2 sm:w-auto">
+            <button type="button" onClick={reset} className="flex-1 cursor-pointer whitespace-nowrap rounded-full px-4 py-2.5 text-sm text-white/60 transition hover:bg-white/5 hover:text-white sm:flex-none" style={{ fontWeight: 400 }}>
+              Reset
+            </button>
+            <button type="button" onClick={save} disabled={saving} className={`${modalPrimaryBtn} flex-1 whitespace-nowrap disabled:opacity-60 sm:flex-none`} style={{ borderRadius: 999, fontWeight: 500 }}>
+              {saving ? "Saving…" : "Save Changes"}
+            </button>
+          </div>
         </div>
       </div>
 

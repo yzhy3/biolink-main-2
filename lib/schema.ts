@@ -77,6 +77,8 @@ export const profiles = pgTable("profiles", {
   showFeedback: integer("show_feedback").notNull().default(1),
   usernameColor: text("username_color"),
   avatarHidden: integer("avatar_hidden").notNull().default(0),
+  enterAnimation: text("enter_animation").notNull().default("fade-up"),
+  avatarDecoration: text("avatar_decoration").notNull().default("none"),
 });
 
 export const socialLinks = pgTable(

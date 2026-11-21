@@ -8,7 +8,7 @@
   --foreground: #ededed;
   --tertiary: #101010;
   --card: #161616;
-  --primary: #7e2c8b;
+  --primary: #16a34a;
   --secondary: #252525;
   --muted: #1f1f1f;
   --muted-foreground: #a1a1a1;
@@ -24,7 +24,7 @@
   --v3-line: #242424;
   --v3-text: #fafafa;
   --v3-muted: #a1a1a1;
-  --v3-purple: #7e2c8b;
+  --v3-purple: #16a34a;
 }
 
 @theme inline {
@@ -33,11 +33,11 @@
   --color-tertiary: var(--tertiary);
   --color-card: var(--card);
   --color-primary: var(--primary);
-  --color-primary-300: #b35fce;
-  --color-primary-400: #9a45b2;
-  --color-primary-500: #8a379d;
-  --color-primary-600: #7e2c8b;
-  --color-primary-700: #641f72;
+  --color-primary-300: #86efac;
+  --color-primary-400: #4ade80;
+  --color-primary-500: #22c55e;
+  --color-primary-600: #16a34a;
+  --color-primary-700: #15803d;
   --color-secondary: var(--secondary);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -46,11 +46,11 @@
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-input: var(--input);
-  --color-chart-1: #7e2c8b;
-  --color-chart-2: #b35fce;
-  --color-chart-3: #9a45b2;
-  --color-chart-4: #8a379d;
-  --color-chart-5: #641f72;
+  --color-chart-1: #16a34a;
+  --color-chart-2: #86efac;
+  --color-chart-3: #4ade80;
+  --color-chart-4: #22c55e;
+  --color-chart-5: #15803d;
   --font-sans: "Montserrat", "Figtree", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --font-mono: "Fragment Mono", ui-monospace, monospace;
   --font-luckiest: "Luckiest Guy", cursive;
@@ -63,7 +63,7 @@
     --foreground: #ededed;
     --tertiary: #101010;
     --card: #161616;
-    --primary: #7e2c8b;
+    --primary: #16a34a;
     --secondary: #252525;
     --muted: #1f1f1f;
     --muted-foreground: #a1a1a1;
@@ -475,3 +475,18 @@ button:focus-visible {
 .animate-scroll-y {
   animation: scroll-y 12s linear infinite;
 }
+/* Feds-inspired profile entrance and interaction motion. */
+@keyframes fade-up { from { opacity: 0; transform: translateY(26px) scale(.985); filter: blur(8px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes zoom { from { opacity: 0; transform: scale(.86); filter: blur(10px); } to { opacity: 1; transform: scale(1); filter: blur(0); } }
+@keyframes slide-left { from { opacity: 0; transform: translateX(42px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes flip { from { opacity: 0; transform: perspective(900px) rotateX(14deg) translateY(18px); } to { opacity: 1; transform: perspective(900px) rotateX(0) translateY(0); } }
+@keyframes reveal-enter { 0% { opacity: 0; transform: scale(1.025); filter: blur(10px); } 100% { opacity: 1; transform: scale(1); filter: blur(0); } }
+.profile-click-reveal { animation: reveal-enter 420ms cubic-bezier(.2,.8,.2,1) both; }
+.profile-click-reveal:active { transform: scale(.985); }
+@media (prefers-reduced-motion: reduce) { .profile-click-reveal { animation: none !important; transition: none !important; } }
+
+.profile-entry-animated { will-change: transform, opacity; }
+@media (prefers-reduced-motion: reduce) { .profile-entry-animated { animation: none !important; } }
+
+[data-card-root] a, [data-card-root] button { transition-property: transform, opacity, border-color, background-color, box-shadow; transition-duration: 180ms; }
+[data-card-root] a:active, [data-card-root] button:active { transform: scale(.975); }
